@@ -1,9 +1,9 @@
 package org.lwjgl.opengl;
 
+import org.jspecify.annotations.*;
+
 import org.lwjgl.system.FunctionProvider;
 import org.lwjgl.system.SharedLibrary;
-
-import org.jspecify.annotations.Nullable;
 
 /**
  * Class for initializing renderer-specific callbacks. Allows to reliably initialize
@@ -23,15 +23,15 @@ public class PojavRendererInit {
         }
         if(!isValidString(rendererName)) {
             System.out.println("PojavRendererInit: Failed to find Pojav renderer name! " +
-                    "Renderer-specific initialization may not work properly");
+                                "Renderer-specific initialization may not work properly");
         }
         // NOTE: hardcoded gl4es libname
-        if (rendererName.endsWith("libgl4es_114.so") || rendererName.endsWith("libng_gl4es.so")) {
+        if(rendererName.endsWith("libng_gl4es.so")) {
             nativeInitGl4esInternals(functionProvider);
         }
     }
 
-    private static boolean isValidString(@Nullable  String s) {
+    private static boolean isValidString(@Nullable String s) {
         return s != null && !s.isEmpty();
     }
 
